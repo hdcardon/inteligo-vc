@@ -68,7 +68,7 @@ def graficar_k12_total_latam(csv_path):
 
 
 with col[1]:
-    st.markdown('#### Total Population')
+    st.markdown('##K12 Enrollment')
     
     k12_total_latam = graficar_k12_total_latam(csv_path)
     st.plotly_chart(k12_total_latam, use_container_width=True)
