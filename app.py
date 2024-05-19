@@ -21,7 +21,7 @@ csv_path = 'data/k12_latam_enrollment_total.csv'
 df = pd.read_csv(csv_path, sep=';', skipinitialspace=True)
 
 # Convertir a formato largo
-df_reshaped = pd.melt(df, id_vars=['Country'], var_name='Year', value_name='Value')
+df_reshaped = pd.melt(df, id_vars=['country'], var_name='year', value_name='value')
 
 
 
@@ -51,14 +51,14 @@ def graficar_k12_total_latam(csv_path):
     df = pd.read_csv(csv_path, sep=';', skipinitialspace=True)
 
     # Convertir a formato largo usando 'Country' en lugar de 'Categoría'
-    df_long = pd.melt(df, id_vars=['Country'], var_name='Year', value_name='Value')
+    df_long = pd.melt(df, id_vars=['country'], var_name='year', value_name='value')
 
     # Convertir las columnas 'Year' y 'Value' al tipo correcto
-    df_long['Year'] = df_long['Year'].str.strip()
-    df_long['Value'] = df_long['Value'].str.replace('.', '').astype(float)
+    df_long['year'] = df_long['year'].str.strip()
+    df_long['value'] = df_long['value'].str.replace('.', '').astype(float)
 
     # Crear la gráfica de áreas con Plotly
-    fig = px.area(df_long, x='Year', y='Value', color='Country', line_group='Country', markers=True)
+    fig = px.area(df_long, x='year', y='value', color='country', line_group='country', markers=True)
 
     # Devolver la figura
     return fig
