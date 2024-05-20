@@ -102,7 +102,7 @@ def crear_choropleth_latam(csv_path):
     fig.update_layout(
         paper_bgcolor='black',
         plot_bgcolor='black',
-        geo=dict(bgcolor='black'),
+        geo=dict(bgcolor='none'),
         font=dict(color='white'),
         title_font=dict(size=24),
         height=800,
