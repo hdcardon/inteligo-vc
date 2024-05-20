@@ -127,7 +127,7 @@ def graficar_k12_private_pe(csv_path):
     df_long['Valor'] = df_long['Valor'].str.replace(',', '.').astype(float)
     
     # Crear la gráfica con Plotly
-    fig = px.line(df_long, x='Año', y='Valor', color='Country', markers=True)
+    fig_bar = px.bar(df_long, x='Año', y='Valor', color='Country', barmode='group')
 
     # Devolver la figura
     return fig
