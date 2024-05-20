@@ -130,7 +130,7 @@ def graficar_k12_private_pe(csv_path):
     fig_bar = px.bar(df_long, x='Año', y='Valor', color='Country', barmode='group')
 
     # Devolver la figura
-    return fig
+    return fig_bar
 
 
 with col[0]:
