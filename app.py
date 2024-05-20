@@ -86,7 +86,8 @@ def crear_choropleth_latam(csv_path):
     # Crear el mapa coroplético con Plotly
     fig = px.choropleth(df, locations='Country', locationmode='country names',
                         color='Value', hover_name='Country',
-                        color_continuous_scale=px.colors.sequential.Plasma)
+                        color_continuous_scale=px.colors.sequential.Plasma,
+                        title=f'Enrollment in Latin America ({last_year})')
     
     # Ajustar el diseño del mapa para enfocarse en América Latina y usar tema oscuro
     fig.update_geos(
