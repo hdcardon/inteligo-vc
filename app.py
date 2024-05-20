@@ -41,7 +41,7 @@ with st.sidebar:
 
 
 ##layout
-col = st.columns((1.5, 4.5, 2), gap='medium')
+col = st.columns((2, 2, 1), gap='medium')
 
 
 
@@ -64,11 +64,63 @@ def graficar_k12_total_latam(csv_path):
     return fig
 
 
+def crear_choropleth_latam(csv_path):
+    # Cargar el DataFrame desde el archivo CSV con el separador correcto y eliminando espacios en blanco
+    df = pd.read_csv(csv_path, sep=';', skipinitialspace=True)
+
+    # Tomar solo las filas del último año disponible
+    last_year = df.columns[-1]
+    df = df[['Country', last_year]].copy()
+    df.columns = ['Country', 'Value']
+    
+    # Limpiar los valores y convertir a flotante
+    df['Value'] = df['Value'].str.replace('.', '').astype(float)
+    
+    # Corrección de nombres de países
+    country_corrections = {
+        'Brasil': 'Brazil',
+        'CR': 'Costa Rica'
+    }
+    df['Country'] = df['Country'].replace(country_corrections)
+    
+    # Crear el mapa coroplético con Plotly
+    fig = px.choropleth(df, locations='Country', locationmode='country names',
+                        color='Value', hover_name='Country',
+                        color_continuous_scale=px.colors.sequential.Plasma,
+                        title=f'Enrollment in Latin America ({last_year})')
+    
+    # Ajustar el diseño del mapa para enfocarse en América Latina y usar tema oscuro
+    fig.update_geos(
+        visible=False, resolution=50,
+        showcountries=True, countrycolor="Black",
+        showcoastlines=True, coastlinecolor="Black",
+        showland=True, landcolor="black",
+        projection_type='mercator',
+        lonaxis_range=[-120, -30], lataxis_range=[-60, 30]
+    )
+
+    fig.update_layout(
+        paper_bgcolor='black',
+        plot_bgcolor='black',
+        geo=dict(bgcolor='black'),
+        font=dict(color='white'),
+        title_font=dict(size=24),
+        height=800,
+        width=1200
+    )
+
+    # Devolver la figura
+    return fig
 
 
+with col[0]:
+    #st.markdown('## Enrollment in Latin America')
+
+    k12_total_map = crear_choropleth_latam(csv_path)
+    st.plotly_chart(k12_total_map, use_container_width=True)
 
 with col[1]:
-    st.markdown('### K12 Enrollment')
+    #st.markdown('## K12 Enrollment')
     
     k12_total_latam = graficar_k12_total_latam(csv_path)
     st.plotly_chart(k12_total_latam, use_container_width=True)
