@@ -41,7 +41,7 @@ with st.sidebar:
 
 
 ##layout
-col = st.columns((2, 2, 1), gap='medium')
+col = st.columns((2, 3, 0), gap='medium')
 
 
 
@@ -145,8 +145,14 @@ with col[1]:
     k12_total_latam = graficar_k12_total_latam(csv_path)
     st.plotly_chart(k12_total_latam, use_container_width=True)
 
-with col[2]:
     st.markdown('## K12 Private PE')
     
     k12_private_pe = graficar_k12_private_pe('data/k12_private_pe.csv')
     st.plotly_chart(k12_private_pe, use_container_width=True)
+    
+
+with col[2]:
+    #st.markdown('## K12 Private PE')
+    
+    #k12_private_pe = graficar_k12_private_pe('data/k12_private_pe.csv')
+    #st.plotly_chart(k12_private_pe, use_container_width=True)
