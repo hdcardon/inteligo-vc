@@ -114,6 +114,25 @@ def crear_choropleth_latam(csv_path):
     return fig
 
 
+##K12 total latam
+def graficar_k12_private_pe(csv_path):
+   # Cargar el DataFrame desde el archivo CSV con el separador correcto y eliminando espacios en blanco
+    df = pd.read_csv(csv_path, sep=';', skipinitialspace=True)
+
+# Convertir a formato largo usando 'Country' en lugar de 'Categoría'
+    df_long = pd.melt(df, id_vars=['Country'], var_name='Año', value_name='Valor')
+
+# Convertir las columnas 'Año' y 'Valor' al tipo correcto
+    df_long['Año'] = df_long['Año'].str.strip()
+    df_long['Valor'] = df_long['Valor'].str.replace(',', '.').astype(float)
+    
+    # Crear la gráfica con Plotly
+    fig = px.line(df_long, x='Año', y='Valor', color='Country', markers=True)
+
+    # Devolver la figura
+    return fig
+
+
 with col[0]:
     #st.markdown('## Enrollment in Latin America')
 
@@ -121,8 +140,13 @@ with col[0]:
     st.plotly_chart(k12_total_map, use_container_width=True)
 
 with col[1]:
-    #st.markdown('## K12 Enrollment')
+    st.markdown('## K12 Enrollment')
     
     k12_total_latam = graficar_k12_total_latam(csv_path)
     st.plotly_chart(k12_total_latam, use_container_width=True)
+
+with col[2]:
+    st.markdown('## K12 Private PE')
     
+    k12_private_pe = graficar_k12_private_pe('data/k12_private_pe.csv')
+    st.plotly_chart(k12_private_pe, use_container_width=True)
