@@ -106,7 +106,7 @@ def crear_choropleth_latam(csv_path):
         geo=dict(bgcolor='rgba(0,0,0,0)'),
         font=dict(color='white'),
         title_font=dict(size=24),
-        height=800,
+        height=1000,
         width=1200
     )
 
