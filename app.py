@@ -151,7 +151,7 @@ with col[1]:
     st.plotly_chart(k12_private_pe, use_container_width=True)
     
 
-with col[2]:
+#with col[2]:
     #st.markdown('## K12 Private PE')
     
     #k12_private_pe = graficar_k12_private_pe('data/k12_private_pe.csv')
