@@ -41,7 +41,7 @@ with st.sidebar:
 
 
 ##layout
-col = st.columns((1, 4), gap='medium')
+col = st.columns((2, 3), gap='medium')
 
 
 
