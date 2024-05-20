@@ -94,15 +94,16 @@ def crear_choropleth_latam(csv_path):
         visible=False, resolution=50,
         showcountries=True, countrycolor="Black",
         showcoastlines=True, coastlinecolor="Black",
-        showland=True, landcolor="black",
+        showland=True, landcolor="rgba(0,0,0,0)",
         projection_type='mercator',
-        lonaxis_range=[-120, -30], lataxis_range=[-60, 30]
+        lonaxis_range=[-120, -30], lataxis_range=[-60, 30],
+        bgcolor='rgba(0,0,0,0)'
     )
 
     fig.update_layout(
-        paper_bgcolor='black',
-        plot_bgcolor='black',
-        geo=dict(bgcolor='none'),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        geo=dict(bgcolor='rgba(0,0,0,0)'),
         font=dict(color='white'),
         title_font=dict(size=24),
         height=800,
